@@ -1,13 +1,301 @@
+import _ from "lodash";
+
 class Item {
-  constructor(item, translate, english = true, transcribe = "t&#390;&#388;") {
+  constructor(
+    item,
+    translate,
+    english = true,
+    transcribe = "t&#390;&#388;",
+    image = "Bag-Àpò"
+  ) {
     this.key = item.toLowerCase().trim();
     this.translate =
       translate || item.split("").reverse().join("").toLowerCase().trim();
-    this.text = item.toLowerCase().trim();
-    this.value = this.text + "_" + this.translate;
+    this.text = item;
+    this.value = _.startCase(this.text) + "_" + _.startCase(this.translate);
     this.english = english;
     this.transcribe = transcribe;
+    this.image = require(`./images/${image}.jpg`).default;
   }
 }
 
-export const data = [new Item("chick"), new Item("mouse"), new Item("cream")];
+export const data = [
+  new Item("bag", "àpò", true, "/bAg/", "Bag-Àpò"),
+  new Item("àpò", "bag", false, "/a:po/", "Bag-Àpò"),
+  new Item("table", "tábílì", true, "/teɪbl/", "Table_Tábílì"),
+  new Item("tábílì", "table", false, "/ta:bi:li/", "Table_Tábílì"),
+  new Item("chair", "Ìjóòkó", true, "/tʃer/", "Chair_Ìjóòkó"),
+  new Item("Ìjóòkó", "chair", false, "/i:joo:ko/", "Chair_Ìjóòkó"),
+  new Item(
+    "ceiling fan",
+    "Àìpê àjà",
+    true,
+    "/siːlɪŋ fæn/",
+    "Ceiling fan_Àìpê àjà"
+  ),
+  new Item("Àìpê àjà", "ceiling fan", false, "/fæn/", "Ceiling fan_Àìpê àjà"),
+  new Item("knife", "Òbê", true, "/naɪf/", "Knife_Òbê"),
+  new Item("Òbê", "knife", false, "/naɪf/", "Knife_Òbê"),
+  new Item("spoon", "Síbí", true, "/spuːn/", "Spoon_Síbí"),
+  new Item("Síbí", "spoon", false, "/spuːn/", "Spoon_Síbí"),
+  new Item(
+    "television",
+    "Amóhùn-máwòrán",
+    true,
+    "/telɪvɪʒn/",
+    "Television_Amóhùn-máwòrán"
+  ),
+  new Item(
+    "Amóhùn-máwòrán",
+    "television",
+    false,
+    "/telɪvɪʒn/",
+    "Television_Amóhùn-máwòrán"
+  ),
+  new Item("speaker", "Agbóhùnsókè", true, "/spiːkər/", "Speaker_Agbóhùnsókè"),
+  new Item("Agbóhùnsókè", "speaker", false, "/spiːkər/", "Speaker_Agbóhùnsókè"),
+  new Item("mirror", "Dígí", true, "/mɪrər/", "Mirror_Dígí"),
+  new Item("Dígí", "mirror", false, "/mɪrər/", "Mirror_Dígí"),
+  new Item("bucket", "Awôn Garawa", true, "/bʌkɪt/", "Bucket_Awôn-Garawa"),
+  new Item("Awôn Garawa", "bucket", false, "/bʌkɪt/", "Bucket_Awôn-Garawa"),
+  new Item("broom", "ìgbálẹ̀", true, "/bruːm/", "Broom_ìgbálẹ̀"),
+  new Item("ìgbálẹ̀", "broom", false, "/bruːm/", "Broom_ìgbálẹ̀"),
+  new Item("carpet", "kápẹ́ẹ̀tì", true, "/kɑːrpɪt/", "Carpet_Kápẹ́ẹ̀tì"),
+  new Item("kápẹ́ẹ̀tì", "carpet", false, "/kɑːrpɪt/", "Carpet_Kápẹ́ẹ̀tì"),
+  new Item("mat", "ẹní", true, "/ẹní/", "Mat_ẹní"),
+  new Item("ẹní", "mat", false, "/ẹní/", "Mat_ẹní"),
+  new Item("fridge", "fìríìjì", true, "/frɪdʒ/", "Fridge_Fìríìjì"),
+  new Item("fìríìjì", "fridge", false, "/frɪdʒ/", "Fridge_Fìríìjì"),
+  new Item("pot", "Ìkòkò", true, "/pɑːt/", "Pot_Ìkòkò"),
+  new Item("Ìkòkò", "pot", false, "/pɑːt/", "Pot_Ìkòkò"),
+  new Item("blanket", "Aso ìbora", true, "/blæŋkɪt/", "Blanket_Aso ìbora"),
+  new Item("Aso ìbora", "blanket", false, "/blæŋkɪt/", "Blanket_Aso ìbora"),
+  new Item("bolt", "bólútì", true, "/bəʊlt/", "Bolt_Edun"),
+  new Item("bólútì", "bolt", false, "/bəʊlt|/", "Bolt_Edun"),
+  new Item("bottle", "Ìgò", true, "/bɑːtl/", "Bottle_Ìgò"),
+  new Item("Ìgò", "bottle", false, "/bɑːtl/", "Bottle_Ìgò"),
+  new Item("box", "Àpótí", true, "/bɑːks/", "Box_Àpótí"),
+  new Item("Àpótí", "box", false, "/bɑːks/", "Box_Àpótí"),
+  new Item("brick", "Òkúta", true, "/brɪk/", "Brick_Òkúta"),
+  new Item("Òkúta", "brick", false, "/brɪk/", "Brick_Òkúta"),
+  new Item("bookcase", "Àpò ìwé", true, "/bʊkkeɪs/", "BookCase_Àpò-ìwé"),
+  new Item("Àpò ìwé", "bookcase", false, "/bʊkkeɪs/", "BookCase_Àpò-ìwé"),
+  new Item("kernel", "Èkùró", true, "/kɜːrnl/", "Kernel_ekuro"),
+  new Item("Èkùró", "kernel", false, "/kɜːrnl/", "Kernel_ekuro"),
+  new Item("garbage", "Ìdòtí", true, "/ɡɑːrbɪdʒ/", "Garbage_Ìdòtí"),
+  new Item("Ìdòtí", "garbage", false, "/ɡɑːrbɪdʒ/", "Garbage_Ìdòtí"),
+  new Item("foam", "Fóómù", true, "/fəʊm/", "Foam_Fóómù"),
+  new Item("Fóómù", "foam", false, "/fəʊm/", "Foam_Fóómù"),
+  new Item("book", "Ìwé", true, "/bʊk/", "Book-Ìwé"),
+  new Item("Ìwé", "book", false, "/bʊk/", "Book-Ìwé"),
+  new Item("blender", "Ìdàpòmóra", true, "/blendər/", "Blender-Ìdàpòmóra"),
+  new Item("Ìdàpòmóra", "blender", false, "/blendər/", "Blender-Ìdàpòmóra"),
+  new Item(
+    "container",
+    "Àwòn àpótí",
+    true,
+    "/kənˈteɪnər/",
+    "Containers_Àwòn àpótí"
+  ),
+  new Item(
+    "Àwòn àpótí",
+    "container",
+    false,
+    "/kənˈteɪnər/",
+    "Containers_Àwòn àpótí"
+  ),
+  new Item("camera", "Ayàwòrán", true, "/kæmərə/", "Camera_Ayàwòrán"),
+  new Item("Ayàwòrán", "camera", false, "/kæmərə/", "Camera_Ayàwòrán"),
+  new Item("hammer", "Òòlù", true, "/hɑːmə/", "Hammer_Òòlù"),
+  new Item("Òòlù", "hammer", false, "/hɑːmə/", "Hammer_Òòlù"),
+  new Item("hearth", "Àìsun", true, "/hɑːrθ/", "Hearth_Àìsun"),
+  new Item("Àìsun", "hearth", false, "/hɑːrθ/", "Hearth_Àìsun"),
+  new Item("grain", "Okà", true, "/ɡreɪn/", "Grain_Okà"),
+  new Item("Okà", "grain", false, "/ɡreɪn/", "Grain_Okà"),
+  new Item("pen", "Gègé Ìkòwé", true, "/pen/", "Pen_Ìkòwé"),
+  new Item("Gègé Ìkòwé", "pen", false, "/pen/", "Pen_Ìkòwé"),
+  new Item(
+    "hair-dryer",
+    "Èro Ìgbe’run",
+    true,
+    "/herdraɪər/",
+    "Hair-dryer_Èro Ìgbe’run"
+  ),
+  new Item(
+    "Èro Ìgbe’run",
+    "hair-dryer",
+    false,
+    "/herdraɪər/",
+    "Hair-dryer_Èro Ìgbe’run"
+  ),
+  new Item("headphone", "Àgbékórí", true, "/hedˌfəʊn/", "Headphone_Àgbékórí"),
+  new Item("Àgbékórí", "headphone", false, "/hedˌfəʊn/", "Headphone_Àgbékórí"),
+  new Item(
+    "ice-cream",
+    "Wàrà Dídì",
+    true,
+    "/aɪs ˈkriːm/",
+    "IceCream_Wàrà-Dídì"
+  ),
+  new Item(
+    "Wàrà Dídì",
+    "ice-cream",
+    false,
+    "/aɪs ˈkriːm/",
+    "IceCream_Wàrà-Dídì"
+  ),
+  new Item("jar", "Ide", true, "/dʒɑːr/", "Jar_Ide"),
+  new Item("Ide", "jar", false, "/dʒɑːr/", "Jar_Ide"),
+  new Item("jewelry", "Ohun òsó", true, "/dʒuːəlrɪ/", "Jewelry_Ohun-òsó"),
+  new Item("Ohun òsó", "jewelry", false, "/dʒuːəlrɪ/", "Jewelry_Ohun-òsó"),
+  new Item("key", "Kókóró", true, "/kiː/", "Key_Kókóró"),
+  new Item("Kókóró", "key", false, "/kiː/", "Key_Kókóró"),
+  new Item("lingerie", "Àwòtélè", true, "/lɑːndʒəˈreɪ/", "Lingerie_Àwòtélè"),
+  new Item("Àwòtélè", "lingerie", false, "/lɑːndʒəˈreɪ/", "Lingerie_Àwòtélè"),
+  new Item("lamp", "Àtùpà", true, "/læmp/", "Lamp_Àtùpà"),
+  new Item("Àtùpà", "lamp", false, "/læmp/", "Lamp_Àtùpà"),
+  new Item("lock", "Títììpa", true, "/lɑːk/", "Lock_Títììpa"),
+  new Item("Títììpa", "lock", false, "/lɑːk/", "Lock_Títììpa"),
+  new Item("mug", "Agolo", true, "/mʌɡ/", "Mugs-Agolo"),
+  new Item("Agolo", "mug", false, "/mʌɡ/", "Mugs-Agolo"),
+  new Item("medicine", "Àwòn òògùn", true, "/medsn/", "Medicine_Àwòn-òògùn"),
+  new Item("Àwòn òògùn", "medicine", false, "/medsn/", "Medicine_Àwòn-òògùn"),
+  new Item("mail", "Méélì", true, "/meɪl/", "Mail_Méélì"),
+  new Item("Méélì", "mail", false, "/meɪl/", "Mail_Méélì"),
+  new Item("magnet", "Àwòn Òòfà", true, "/mæɡnət/", "Magnets_Àwòn-Òòfà"),
+  new Item("Àwòn Òòfà", "magnet", false, "/mæɡnət/", "Magnets_Àwòn-Òòfà"),
+  new Item("makeup", "Ìfipajú", true, "/meɪkʌp/", "Make-Up_Ìfipajú"),
+  new Item("Ìfipajú", "makeup", false, "/meɪkʌp/", "Make-Up_Ìfipajú"),
+  new Item("perfume", "Lófíndà", true, "/pərˈfjuːm/", "Perfume_Lófíndà"),
+  new Item("Lófíndà", "perfume", false, "/pərˈfjuːm/", "Perfume_Lófíndà"),
+  new Item("pitcher", "Làdùgbo", true, "/pɪtʃər/", "Pitcher_Làdùgbo"),
+  new Item("Làdùgbo", "pitcher", false, "/pɪtʃər/", "Pitcher_Làdùgbo"),
+  new Item("printer", "Ìtèwé", true, "/prɪntər/", "Printer_Ìtèwé"),
+  new Item("Ìtèwé", "printer", false, "/prɪntər/", "Printer_Ìtèwé"),
+  new Item(
+    "pressure cooker",
+    "Olùdáná títè",
+    true,
+    "/preʃə kʊkər/",
+    "Pressure-Cooker_Olùdáná-títè"
+  ),
+  new Item(
+    "Olùdáná títè",
+    "pressure cooker",
+    false,
+    "/preʃə kʊkər/",
+    "Pressure-Cooker_Olùdáná-títè"
+  ),
+  new Item("quilt", "Aso àtèrìn", true, "/kwɪlt/", "Quilt_Aso àtèrìn"),
+  new Item("Aso àtèrìn", "quilt", false, "/kwɪlt/", "Quilt_Aso àtèrìn"),
+  new Item("radio", "Rédíò", true, "/reɪdɪəʊ/", "Radio_Rédíò"),
+  new Item("Rédíò", "Radio", false, "/reɪdɪəʊ/", "Radio_Rédíò"),
+  new Item("raincoat", "Aso Ewu", true, "/mʌɡ/", "RainCoat_Aso-Ewu"),
+  new Item("Aso Ewu", "raincoat", false, "/mʌɡ/", "RainCoat_Aso-Ewu"),
+  new Item("ribbon", "Teerē", true, "/rɪbən/", "Ribbon_Teerē"),
+  new Item("Teerē", "ribbon", false, "/rɪbən/", "Ribbon_Teerē"),
+  new Item("rifle", "Ìbon", true, "/raɪfl/", "Rifle_Ìbon"),
+  new Item("Ìbon", "rifle", false, "/raɪfl/", "Rifle_Ìbon"),
+  new Item("rug", "Àwòn aso àtèrìn ", true, "/rʌɡ/", "Rugs_Àwòn aso àtèrìn"),
+  new Item("Àwòn aso àtèrìn ", "rug", false, "/rʌɡ/", "Rugs_Àwòn aso àtèrìn"),
+  new Item("stereo", "Sítéríò", true, "/sterɪəʊ/", "Stereo_Sítéríò"),
+  new Item("Sítéríò", "stereo", false, "/sterɪəʊ/", "Stereo_Sítéríò"),
+  new Item("shades", "Àwòn ìbòji", true, "/ʃeɪdz/", "Shades_Àwòn ìbòji"),
+  new Item("Àwòn ìbòji", "shades", false, "/ʃeɪdz/", "Shades_Àwòn ìbòji"),
+  new Item("socks", "Ìbosè", true, "/sɑːks/", "Socks_Ìbosè"),
+  new Item("Ìbosè", "socks", false, "/sɑːks/", "Socks_Ìbosè"),
+  new Item("stamp", "Àwòn òñtè", true, "/stæmp/", "Stamp_Àwòn òñtè"),
+  new Item("Àwòn òñtè", "stamp", false, "/stæmp/", "Stamp_Àwòn òñtè"),
+  new Item(
+    "sneakers",
+    "Àwòn bàtà ìdárayá",
+    true,
+    "/sniːkərz/",
+    "Sneakers_Àwòn bàtà ìdárayá"
+  ),
+  new Item(
+    "Àwòn bàtà ìdárayá",
+    "sneakers",
+    false,
+    "/sniːkərz/",
+    "Sneakers_Àwòn bàtà ìdárayá"
+  ),
+  new Item("scarf", "síkáfù", true, "/skɑːrf|/", "Scarf_síkáfù"),
+  new Item("síkáfù", "scarf", false, "/skɑːrf/", "Scarf_síkáfù"),
+  new Item("timers", "Aago", true, "/taɪmərz/", "Timers_Aago"),
+  new Item("Aago", "timers", false, "/taɪmərz/", "Timers_Aago"),
+  new Item("trumpet", "Ìpè", true, "/trʌmpɪt/", "Trumpet_Ìpè"),
+  new Item("Ìpè", "trumpet", false, "/trʌmpɪt/", "Trumpet_Ìpè"),
+  new Item("tapestry", "téètì", true, "/tæpəstrɪd/", "Tapestry_téètì"),
+  new Item("téètì", "tapestry", false, "/tæpəstrɪd/", "Tapestry_téètì"),
+  new Item("tissue", "Àwòn ìsàn", true, "/tɪʃuː/", "Tissue_Àwòn ìsàn"),
+  new Item("Àwòn ìsàn", "tissue", false, "/tɪʃuː/", "Tissue_Àwòn ìsàn"),
+  new Item("oven", "Àdìro", true, "/ʌvn/", "Oven_Àdìro"),
+  new Item("Àdìro", "oven", false, "/ʌvn/", "Oven_Àdìro"),
+  new Item("vent", "Ihò", true, "/vent/", "Vent_Ihò"),
+  new Item("Ihò", "vent", false, "/vent/", "Vent_Ihò"),
+  new Item("washer", "Ìfoso", true, "/wɑːʃər/", "Washer_Ìfoso"),
+  new Item("Ìfoso", "washer", false, "/wɑːʃər/", "Washer_Ìfoso"),
+  // new Item("vase", "Ìkòkò", true, "/veɪs/", "Vase_Ìkòkò"),
+  // new Item("Ìkòkò", "vase", false, "/veɪs/", "Vase_Ìkòkò"),
+  new Item("vacuum", "Ìgbálè", true, "/vækjʊəm/", "Vacuum_Ìgbálè"),
+  new Item("Ìgbálè", "vacuum", false, "/vækjʊəm/", "Vacuum_Ìgbálè"),
+  new Item("torch", "Ògùsò", true, "/tɔːrtʃ/", "Torch_Ògùsò"),
+  new Item("Ògùsò", "torch", false, "/tɔːrtʃ/", "Torch_Ògùsò"),
+  new Item(
+    "yardstick",
+    "Okùn okùn",
+    true,
+    "/jɑːrdstɪk/",
+    "YardStick_Okùn-okùn"
+  ),
+  new Item(
+    "Okùn okùn",
+    "yardstick",
+    false,
+    "/jɑːrdstɪk/",
+    "YardStick_Okùn-okùn"
+  ),
+  new Item("yoghurt", "Wàrà", true, "/jɒɡət/", "Yoghurt_Wàrà"),
+  new Item("Wàrà", "yoghurt", false, "/jɒɡət/", "Yoghurt_Wàrà"),
+  new Item("yarn", "Òwú", true, "/jɑːrn/", "Yarn_Òwú"),
+  new Item("Òwú", "yarn", false, "/jɑːrn/", "Yarn_Òwú"),
+  new Item("hanger", "Kóórí", true, "/hæŋər/", "Hanger_Kóórí"),
+  new Item("Kóórí", "hanger", false, "/hæŋər/", "Hanger_Kóórí"),
+  new Item("wardrobe", "Asò", true, "/wɔːrdrəʊb/", "Wardrobe_Asò"),
+  new Item("Asò", "wardrobe", false, "/wɔːrdrəʊb/", "Wardrobe_Asò"),
+  new Item("zipper", "Àpò ìdálénū", true, "/zɪpər/", "Zipper_ Àpò ìdálénū"),
+  new Item("Àpò ìdálénū", "zipper", false, "/zɪpər/", "Zipper_ Àpò ìdálénū"),
+  new Item("brush", "Félé", true, "/brʌʃ/", "Brush_Félé"),
+  new Item("Félé", "brush", false, "/brʌʃ/", "Brush_Félé"),
+  new Item(
+    "telephone",
+    "Tēlifóónù",
+    true,
+    "/telɪfəʊn/",
+    "Telephone _ Tēlifóónù"
+  ),
+  new Item(
+    "Tēlifóónù",
+    "telephone",
+    false,
+    "/telɪfəʊn/",
+    "Telephone _ Tēlifóónù"
+  ),
+  new Item(
+    "toothpaste",
+    "Ehín elé",
+    true,
+    "/tuːθpeɪst/",
+    "ToothPaste_Ehín-elé"
+  ),
+  new Item(
+    "Ehín elé",
+    "toothpaste",
+    false,
+    "/tuːθpeɪst/",
+    "ToothPaste_Ehín-elé"
+  ),
+  new Item("staple", "Amúnkanmóra", true, "/steɪpl/", "Stapler_Amukanmora"),
+  new Item("Amúnkanmóra", "staple", false, "/steɪpl/", "Stapler_Amukanmora"),
+];
