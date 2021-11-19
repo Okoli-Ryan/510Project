@@ -42,8 +42,8 @@ h3{
 }
 
 .image > img{
-  width: 15vw;
-  height: 15vw;
+  width: 40vw;
+  height: 40vw;
   border: 1px solid black;
 }
 
@@ -53,4 +53,9 @@ h3{
   margin: 1rem auto;
   padding: 1rem;
 
+}
+
+@media only screen and (max-width: 768px) {
+  h2{
+    font-size: 1.1em}
 }
