@@ -59,7 +59,9 @@ function App() {
               </h2>
               <h2
                 dangerouslySetInnerHTML={{
-                  __html: `Yoruba transcription: ${selectValue.current.transcribe}`,
+                  __html: `Yoruba transcription: ${normalize(
+                    selectValue.current.transcribe
+                  )}`,
                 }}></h2>
             </>
           )}

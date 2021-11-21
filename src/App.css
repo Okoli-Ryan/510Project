@@ -42,8 +42,8 @@ h3{
 }
 
 .image > img{
-  width: 40vw;
-  height: 40vw;
+  width: 20vw;
+  height: 20vw;
   border: 1px solid black;
 }
 
@@ -62,5 +62,10 @@ h3{
   
   .section-drop {
     width: calc(100% - 1rem); 
+  }
+
+  .image > img{
+    width: 40vw;
+    height: 40vw;
   }
   }
