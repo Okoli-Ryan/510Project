@@ -53,14 +53,33 @@ function App() {
                 Searched Text: {selectValue.current.text}
               </h2>
               <h2 className="translate">
-                Translation in{" "}
-                {selectValue.current.english ? "Yoruba" : "English"}:{" "}
-                {selectValue.current.translate}
+                Translation in Yoruba
+                {selectValue.current.translateYor}
               </h2>
               <h2
                 dangerouslySetInnerHTML={{
                   __html: `Yoruba transcription: ${normalize(
-                    selectValue.current.transcribe
+                    selectValue.current.transcribeYor
+                  )}`,
+                }}></h2>
+              <h2 className="translate">
+                Translation in Igbo
+                {selectValue.current.translateIgb}
+              </h2>
+              <h2
+                dangerouslySetInnerHTML={{
+                  __html: `Igbo transcription: ${normalize(
+                    selectValue.current.transcribeIgb
+                  )}`,
+                }}></h2>
+              <h2 className="translate">
+                Translation in Hausa
+                {selectValue.current.translateHau}
+              </h2>
+              <h2
+                dangerouslySetInnerHTML={{
+                  __html: `Hausa transcription: ${normalize(
+                    selectValue.current.transcribeHau
                   )}`,
                 }}></h2>
             </>

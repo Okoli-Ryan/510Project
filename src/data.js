@@ -3,299 +3,406 @@ import _ from "lodash";
 class Item {
   constructor(
     item,
-    translate,
-    english = true,
-    transcribe = "t&#390;&#388;",
+    translateYor,
+    translateIgb,
+    translateHau,
+    transcribeYor,
+    transcribeIgb,
+    transcribeHau,
     image = "Bag-Àpò"
   ) {
     this.key = item.toLowerCase().trim();
-    this.translate =
-      translate || item.split("").reverse().join("").toLowerCase().trim();
+    this.translateYor = translateYor;
+    this.translateIgb = translateIgb;
+    this.translateHau = translateHau;
     this.text = item;
-    this.value = _.startCase(this.text) + "_" + _.startCase(this.translate);
-    this.english = english;
-    this.transcribe = transcribe;
+    this.value = _.startCase(this.text) + "_" + _.startCase(this.translateYor);
+    this.transcribeYor = transcribeYor || "//";
+    this.transcribeHau = transcribeHau || "//";
+    this.transcribeIgb = transcribeIgb || "//";
     this.image = require(`./images/${image}.jpg`).default;
   }
 }
 
 export const data = [
-  new Item("bag", "àpò", true, "/a:po/", "Bag-Àpò"),
-  new Item("àpò", "bag", false, "/a:po/", "Bag-Àpò"),
-  new Item("table", "tábílì", true, "/ta:bi:li/", "Table_Tábílì"),
-  new Item("tábílì", "table", false, "/ta:bi:li/", "Table_Tábílì"),
-  new Item("chair", "Ìjóòkó", true, "/i:joo:ko/", "Chair_Ìjóòkó"),
-  new Item("Ìjóòkó", "chair", false, "/i:joo:ko/", "Chair_Ìjóòkó"),
+  new Item("bag", "àpò", "akpa", "jakar", "/a:po/", "/a:kpa:/", "/dja:ka:/", "Bag-Àpò"),
+  new Item("table", "tábílì", "tebụl", "tebur", "/ta:bi:li/", "/tebu:l/","/tebu:r/", "Table_Tábílì"),
+  new Item("chair", "Ìjóòkó", "oche", "kujera", "/i:jo:ko/", "/o:tʃe/", "/ku:dʒera:/", "Chair_Ìjóòkó"),
   new Item(
     "ceiling fan",
     "Àìpê àjà",
-    true,
+    "uko ụlọ fan",
+    "fan rufi",
     "/Àì:pê à:jà/",
+    "/u:ko u:lɒ fa:n/", "/fa:n ru:fi/",
     "Ceiling fan_Àìpê àjà"
   ),
-  new Item("Àìpê àjà", "ceiling fan", false, "/Àì:pê à:jà/", "Ceiling fan_Àìpê àjà"),
-  new Item("knife", "Òbê", true, "/Ò:bê/", "Knife_Òbê"),
-  new Item("Òbê", "knife", false, "/Ò:bê/", "Knife_Òbê"),
-  new Item("spoon", "Síbí", true, "/Sí:bí/", "Spoon_Síbí"),
-  new Item("Síbí", "spoon", false, "/Sí:bí/", "Spoon_Síbí"),
+  new Item("knife", "Òbê", "mma", "wuka", "/Ò:bê/", "/mma:/", "/wu:ka:/", "Knife_Òbê"),
+  new Item("spoon", "Síbí", "ngaji", "cokali", "/Sí:bí/","/ngadʒi:/", "/kɒka:li/", "Spoon_Síbí"),
   new Item(
     "television",
     "Amóhùn-máwòrán",
-    true,
+    "telivishọn",
+    "talabijin",
     "/A:mó:hùn-má:wò:rán/",
+    "/teliviʃn/", "/ta:la:bi:dʒn/",
     "Television_Amóhùn-máwòrán"
+  ),
+
+  new Item(
+    "speaker",
+    "Agbóhùnsókè",
+    "ọkà okwu",
+    "mai magana",
+    "/A:gbó:hùn:só:kè/",
+    "/ɔka: ɔku:/","/mai ma:gana/",
+    "Speaker_Agbóhùnsókè"
   ),
   new Item(
-    "Amóhùn-máwòrán",
-    "television",
-    false,
-    "/A:mó:hùn-má:wò:rán/",
-    "Television_Amóhùn-máwòrán"
+    "bucket",
+    "Awôn Garawa",
+    "ịwụ",
+    "guga",
+    "/Awôn Ga:ra:wa/",
+    "/i:wu/","/gu:ga:/",
+    "Bucket_Awôn-Garawa"
   ),
-  new Item("speaker", "Agbóhùnsókè", true, "/A:gbó:hùn:só:kè/", "Speaker_Agbóhùnsókè"),
-  new Item("Agbóhùnsókè", "speaker", false, "/A:gbó:hùn:só:kè/", "Speaker_Agbóhùnsókè"),
-  new Item("mirror", "Dígí", true, "/Dí:gí/", "Mirror_Dígí"),
-  new Item("Dígí", "mirror", false, "/Dí:gí/", "Mirror_Dígí"),
-  new Item("bucket", "Awôn Garawa", true, "/Awôn Ga:ra:wa/", "Bucket_Awôn-Garawa"),
-  new Item("Awôn Garawa", "bucket", false, "/Awôn Ga:ra:wa/", "Bucket_Awôn-Garawa"),
-  new Item("broom", "ìgbálẹ̀", true, "/ì:gbá:lẹ̀/", "Broom_ìgbálẹ̀"),
-  new Item("ìgbálẹ̀", "broom", false, "/ì:gbá:lẹ̀/", "Broom_ìgbálẹ̀"),
-  new Item("carpet", "kápẹ́ẹ̀tì", true, "/ká:pẹ́ẹ̀:tì/", "Carpet_Kápẹ́ẹ̀tì"),
-  new Item("kápẹ́ẹ̀tì", "carpet", false, "/ká:pẹ́ẹ̀:tì/", "Carpet_Kápẹ́ẹ̀tì"),
-  new Item("mat", "ẹní", true, "/ẹ:ní//", "Mat_ẹní"),
-  new Item("ẹní", "mat", false, "/ẹ:ní/", "Mat_ẹní"),
-  new Item("fridge", "fìríìjì", true, "/fì:ríì:jì/", "Fridge_Fìríìjì"),
-  new Item("fìríìjì", "fridge", false, "/fì:ríì:jì/", "Fridge_Fìríìjì"),
-  new Item("pot", "Ìkòkò", true, "/Ìkòkò/", "Pot_Ìkòkò"),
-  new Item("Ìkòkò", "pot", false, "/Ìkòkò/", "Pot_Ìkòkò"),
-  new Item("blanket", "Aso ìbora", true, "/A:so ì:bo:ra/", "Blanket_Aso ìbora"),
-  new Item("Aso ìbora", "blanket", false, "/A:so ì:bo:ra/", "Blanket_Aso ìbora"),
-  new Item("bolt", "bólútì", true, "/bó:lú:tì/", "Bolt_Edun"),
-  new Item("bólútì", "bolt", false, "/bó:lú:tì/", "Bolt_Edun"),
-  new Item("bottle", "Ìgò", true, "/Ì:gò/", "Bottle_Ìgò"),
-  new Item("Ìgò", "bottle", false, "/Ì:gò/", "Bottle_Ìgò"),
-  new Item("box", "Àpótí", true, "/À:pó:tí/", "Box_Àpótí"),
-  new Item("Àpótí", "box", false, "/À:pó:tí/", "Box_Àpótí"),
-  new Item("brick", "Òkúta", true, "/Ò:kú:ta/", "Brick_Òkúta"),
-  new Item("Òkúta", "brick", false, "/Ò:kú:ta/", "Brick_Òkúta"),
-  new Item("bookcase", "Àpò ìwé", true, "/À:pò:wé/", "BookCase_Àpò-ìwé"),
-  new Item("Àpò ìwé", "bookcase", false, "/À:pò:wé/", "BookCase_Àpò-ìwé"),
-  new Item("kernel", "Èkùró", true, "/È:kù:ró/", "Kernel_ekuro"),
-  new Item("Èkùró", "kernel", false, "/È:kù:ró/", "Kernel_ekuro"),
-  new Item("garbage", "Ìdòtí", true, "/Ì:dò:tí/", "Garbage_Ìdòtí"),
-  new Item("Ìdòtí", "garbage", false, "/Ì:dò:tí/", "Garbage_Ìdòtí"),
-  new Item("foam", "Fóómù", true, "/Fóó:mù/", "Foam_Fóómù"),
-  new Item("Fóómù", "foam", false, "/Fóó:mù/", "Foam_Fóómù"),
-  new Item("book", "Ìwé", true, "/Ì:wé/", "Book-Ìwé"),
-  new Item("Ìwé", "book", false, "/Ì:wé/", "Book-Ìwé"),
-  new Item("blender", "Ìdàpòmóra", true, "/Ì:dà:pò:mó:ra/", "Blender-Ìdàpòmóra"),
-  new Item("Ìdàpòmóra", "blender", false, "/Ì:dà:pò:mó:ra/", "Blender-Ìdàpòmóra"),
+  new Item(
+    "broom",
+    "ìgbálẹ̀",
+    "aziza",
+    "tsintsiya",
+    "/ì:gbá:lẹ̀/",
+    "Broom_ìgbálẹ̀"
+  ),
+  new Item(
+    "carpet",
+    "kápẹ́ẹ̀tì",
+    "kapeeti",
+    "kafet",
+    "/ká:pẹ́ẹ̀:tì/",
+    "Carpet_Kápẹ́ẹ̀tì"
+  ),
+  new Item("mat", "ẹní", "ute", "tabarma", "/ẹ:ní/", "Mat_ẹní"),
+  new Item(
+    "fridge",
+    "fìríìjì",
+    "ngwa nju oyi",
+    "firiji",
+    "/fì:ríì:jì/",
+    "Fridge_Fìríìjì"
+  ),
+  new Item("pot", "Ìkòkò", "ite", "tukunya", "/Ìkòkò/", "Pot_Ìkòkò"),
+  new Item(
+    "blanket",
+    "Aso ìbora",
+    "blanketị",
+    "bargo",
+    "/A:so ì:bo:ra/",
+    "Blanket_Aso ìbora"
+  ),
+  new Item("bolt", "bólútì", "bolt", "aronji", "/bó:lú:tì/", "Bolt_Edun"),
+  new Item("bottle", "Ìgò", "karama", "kwalban", "/Ì:gò/", "Bottle_Ìgò"),
+  new Item("box", "Àpótí", "igbe", "akwatin", "/À:pó:tí/", "Box_Àpótí"),
+  new Item("brick", "Òkúta", "brik", "bulo", "/Ò:kú:ta/", "Brick_Òkúta"),
+  new Item(
+    "bookcase",
+    "Àpò ìwé",
+    "akwụkwọ",
+    "akwatin littafi",
+    "/À:pò:wé/",
+    "BookCase_Àpò-ìwé"
+  ),
+  new Item("kernel", "Èkùró", "kernel", "kwaya", "/È:kù:ró/", "Kernel_ekuro"),
+  new Item("garbage", "Ìdòtí", "mkpofu", "datti", "/Ì:dò:tí/", "Garbage_Ìdòtí"),
+  new Item("foam", "Fóómù", "ụfụfụ", "kumfa", "/Fóó:mù/", "Foam_Fóómù"),
+  new Item("book", "Ìwé", "akwụkwọ", "littafi", "/Ì:wé/", "Book-Ìwé"),
+  new Item(
+    "blender",
+    "Ìdàpòmóra",
+    "blender",
+    "blender",
+    "/Ì:dà:pò:mó:ra/",
+    "Blender-Ìdàpòmóra"
+  ),
   new Item(
     "container",
     "Àwòn àpótí",
-    true,
+    "akpa",
+    "ganga",
     "/À:wòn à:pó:tí/",
     "Containers_Àwòn àpótí"
   ),
+
   new Item(
-    "Àwòn àpótí",
-    "container",
-    false,
-    "/À:wòn à:pó:tí/",
-    "Containers_Àwòn àpótí"
+    "camera",
+    "Ayàwòrán",
+    "igwefoto",
+    "kamara",
+    "/A:yà:wò:rán/",
+    "Camera_Ayàwòrán"
   ),
-  new Item("camera", "Ayàwòrán", true, "/A:yà:wò:rán/", "Camera_Ayàwòrán"),
-  new Item("Ayàwòrán", "camera", false, "/A:yà:wò:rán/", "Camera_Ayàwòrán"),
-  new Item("hammer", "Òòlù", true, "/Òò:lù/", "Hammer_Òòlù"),
-  new Item("Òòlù", "hammer", false, "/Òò:lù/", "Hammer_Òòlù"),
-  new Item("hearth", "Àìsun", true, "/Àì:sun/", "Hearth_Àìsun"),
-  new Item("Àìsun", "hearth", false, "/Àì:sun/", "Hearth_Àìsun"),
-  new Item("grain", "Okà", true, "/O:kà/", "Grain_Okà"),
-  new Item("Okà", "grain", false, "/O:kà/", "Grain_Okà"),
-  new Item("pen", "Gègé Ìkòwé", true, "/Gè:gé Ì:kò:wé/", "Pen_Ìkòwé"),
-  new Item("Gègé Ìkòwé", "pen", false, "/Gè:gé Ì:kò:wé/", "Pen_Ìkòwé"),
+  new Item("hammer", "Òòlù", "hama", "guduma", "/Òò:lù/", "Hammer_Òòlù"),
+  new Item("hearth", "Àìsun", "hearth", "hearth", "/Àì:sun/", "Hearth_Àìsun"),
+  new Item("grain", "Okà", "ọka", "hatsi", "/O:kà/", "Grain_Okà"),
+  new Item(
+    "pen",
+    "Gègé Ìkòwé",
+    "pen",
+    "alkalami",
+    "/Gè:gé Ì:kò:wé/",
+    "Pen_Ìkòwé"
+  ),
   new Item(
     "hair-dryer",
     "Èro Ìgbe’run",
-    true,
+    "onye na-ehicha ntutu",
+    "na'urar bushewa",
     "/È:ro Ì:gbe’:run/",
     "Hair-dryer_Èro Ìgbe’run"
   ),
+
   new Item(
-    "Èro Ìgbe’run",
-    "hair-dryer",
-    false,
-    "/È:ro Ì:gbe’:run/",
-    "Hair-dryer_Èro Ìgbe’run"
+    "headphone",
+    "Àgbékórí",
+    "ekweisi",
+    "headphone",
+    "/À:gbé:kó:rí/",
+    "Headphone_Àgbékórí"
   ),
-  new Item("headphone", "Àgbékórí", true, "/À:gbé:kó:rí/", "Headphone_Àgbékórí"),
-  new Item("Àgbékórí", "headphone", false, "/À:gbé:kó:rí/", "Headphone_Àgbékórí"),
   new Item(
     "ice-cream",
     "Wàrà Dídì",
-    true,
-    "/Wà:rà Dí:dì/",
-    "IceCream_Wàrà-Dídì"
-  ),
-  new Item(
-    "Wàrà Dídì",
     "ice-cream",
-    false,
+    "ice-cream",
     "/Wà:rà Dí:dì/",
     "IceCream_Wàrà-Dídì"
   ),
-  new Item("jar", "Ide", true, "/I:de/", "Jar_Ide"),
-  new Item("Ide", "jar", false, "/I:de/", "Jar_Ide"),
-  new Item("jewelry", "Ohun òsó", true, "/O:hun ò:só/", "Jewelry_Ohun-òsó"),
-  new Item("Ohun òsó", "jewelry", false, "/O:hun ò:só/", "Jewelry_Ohun-òsó"),
-  new Item("key", "Kókóró", true, "/Kó:kó:ró/", "Key_Kókóró"),
-  new Item("Kókóró", "key", false, "/Kó:kó:ró/", "Key_Kókóró"),
-  new Item("lingerie", "Àwòtélè", true, "/À:wò:té:lè/", "Lingerie_Àwòtélè"),
-  new Item("Àwòtélè", "lingerie", false, "/À:wò:té:lè/", "Lingerie_Àwòtélè"),
-  new Item("lamp", "Àtùpà", true, "/À:tù:pà/", "Lamp_Àtùpà"),
-  new Item("Àtùpà", "lamp", false, "/À:tù:pà/", "Lamp_Àtùpà"),
-  new Item("lock", "Títììpa", true, "/Tí:tìì:pa/", "Lock_Títììpa"),
-  new Item("Títììpa", "lock", false, "/Tí:tìì:pa/", "Lock_Títììpa"),
-  new Item("mug", "Agolo", true, "/A:go:lo/", "Mugs-Agolo"),
-  new Item("Agolo", "mug", false, "/A:go:lo/", "Mugs-Agolo"),
-  new Item("medicine", "Àwòn òògùn", true, "/À:wòn òò:gùn/", "Medicine_Àwòn-òògùn"),
-  new Item("Àwòn òògùn", "medicine", false, "/À:wòn òò:gùn/", "Medicine_Àwòn-òògùn"),
-  new Item("mail", "Méélì", true, "/Méé:lì/", "Mail_Méélì"),
-  new Item("Méélì", "mail", false, "/Méé:lì/", "Mail_Méélì"),
-  new Item("magnet", "Àwòn Òòfà", true, "/À:wòn Òò:fà/", "Magnets_Àwòn-Òòfà"),
-  new Item("Àwòn Òòfà", "magnet", false, "/À:wòn Òò:fà/", "Magnets_Àwòn-Òòfà"),
-  new Item("makeup", "Ìfipajú", true, "/Ì:fi:pa:jú/", "Make-Up_Ìfipajú"),
-  new Item("Ìfipajú", "makeup", false, "/Ì:fi:pa:jú/", "Make-Up_Ìfipajú"),
-  new Item("perfume", "Lófíndà", true, "/Ló:fí:n:dà/", "Perfume_Lófíndà"),
-  new Item("Lófíndà", "perfume", false, "/Ló:fí:n:dà/", "Perfume_Lófíndà"),
-  new Item("pitcher", "Làdùgbo", true, "/Là:dù:gbo/", "Pitcher_Làdùgbo"),
-  new Item("Làdùgbo", "pitcher", false, "/Là:dù:gbo/", "Pitcher_Làdùgbo"),
-  new Item("printer", "Ìtèwé", true, "/Ì:tè:wé/", "Printer_Ìtèwé"),
-  new Item("Ìtèwé", "printer", false, "/Ì:tè:wé/", "Printer_Ìtèwé"),
+
+  new Item("jar", "Ide", "ite", "kwalba", "/I:de/", "Jar_Ide"),
+  new Item(
+    "jewelry",
+    "Ohun òsó",
+    "ọla",
+    "kayan ado",
+    "/O:hun ò:só/",
+    "Jewelry_Ohun-òsó"
+  ),
+  new Item("key", "Kókóró", "igodo", "maɓalli", "/Kó:kó:ró/", "Key_Kókóró"),
+  new Item(
+    "lingerie",
+    "Àwòtélè",
+    "uwe ime",
+    "kamfai",
+    "/À:wò:té:lè/",
+    "Lingerie_Àwòtélè"
+  ),
+  new Item("lamp", "Àtùpà", "oriọna", "fitila", "/À:tù:pà/", "Lamp_Àtùpà"),
+  new Item(
+    "lock",
+    "Títììpa",
+    "mkpọchi",
+    "kulle",
+    "/Tí:tìì:pa/",
+    "Lock_Títììpa"
+  ),
+  new Item("mug", "Agolo", "iko", "mug", "/A:go:lo/", "Mugs-Agolo"),
+  new Item(
+    "medicine",
+    "Àwòn òògùn",
+    "ọgwụ",
+    "magani",
+    "/À:wòn òò:gùn/",
+    "Medicine_Àwòn-òògùn"
+  ),
+  new Item("mail", "Méélì", "ozi", "mail", "/Méé:lì/", "Mail_Méélì"),
+  new Item(
+    "magnet",
+    "Àwòn Òòfà",
+    "magnet",
+    "magnet",
+    "/À:wòn Òò:fà/",
+    "Magnets_Àwòn-Òòfà"
+  ),
+  new Item(
+    "makeup",
+    "Ìfipajú",
+    "etemeete",
+    "kayan shafa",
+    "/Ì:fi:pa:jú/",
+    "Make-Up_Ìfipajú"
+  ),
+  new Item(
+    "perfume",
+    "Lófíndà",
+    "senti",
+    "turare",
+    "/Ló:fí:n:dà/",
+    "Perfume_Lófíndà"
+  ),
+  new Item(
+    "pitcher",
+    "Làdùgbo",
+    "ọkpọ",
+    "tulu",
+    "/Là:dù:gbo/",
+    "Pitcher_Làdùgbo"
+  ),
+  new Item(
+    "printer",
+    "Ìtèwé",
+    "ngwa nbipute",
+    "printer",
+    "/Ì:tè:wé/",
+    "Printer_Ìtèwé"
+  ),
   new Item(
     "pressure cooker",
     "Olùdáná títè",
-    true,
+    "nrụgide osi nri",
+    "matsa lamba cooker",
     "/O:lù:dá:ná tí:tè/",
     "Pressure-Cooker_Olùdáná-títè"
   ),
+
   new Item(
-    "Olùdáná títè",
-    "pressure cooker",
-    false,
-    "/O:lù:dá:ná tí:tè/",
-    "Pressure-Cooker_Olùdáná-títè"
+    "quilt",
+    "Aso àtèrìn",
+    "quilt",
+    "quilt",
+    "/A:so à:tè:rìn/",
+    "Quilt_Aso àtèrìn"
   ),
-  new Item("quilt", "Aso àtèrìn", true, "/A:so à:tè:rìn/", "Quilt_Aso àtèrìn"),
-  new Item("Aso àtèrìn", "quilt", false, "/A:so à:tè:rìn/", "Quilt_Aso àtèrìn"),
-  new Item("radio", "Rédíò", true, "/Ré:dí:ò/", "Radio_Rédíò"),
-  new Item("Rédíò", "Radio", false, "/Ré:dí:ò/", "Radio_Rédíò"),
-  new Item("raincoat", "Aso Ewu", true, "/A:so E:wu/", "RainCoat_Aso-Ewu"),
-  new Item("Aso Ewu", "raincoat", false, "/A:so E:wu/", "RainCoat_Aso-Ewu"),
-  new Item("ribbon", "Teerē", true, "/Te:e:rē/", "Ribbon_Teerē"),
-  new Item("Teerē", "ribbon", false, "/Te:e:rē/", "Ribbon_Teerē"),
-  new Item("rifle", "Ìbon", true, "/Ì:bon/", "Rifle_Ìbon"),
-  new Item("Ìbon", "rifle", false, "/Ì:bon/", "Rifle_Ìbon"),
-  new Item("rug", "Àwòn aso àtèrìn ", true, "/À:wòn a:so à:tè:rìn/", "Rugs_Àwòn aso àtèrìn"),
-  new Item("Àwòn aso àtèrìn", "rug", false, "/À:wòn a:so à:tè:rìn/", "Rugs_Àwòn aso àtèrìn"),
-  new Item("stereo", "Sítéríò", true, "/Sí:té:rí:ò/", "Stereo_Sítéríò"),
-  new Item("Sítéríò", "stereo", false, "/Sí:té:rí:ò/", "Stereo_Sítéríò"),
-  new Item("shades", "Àwòn ìbòji", true, "/À:wòn ì:bò:ji/", "Shades_Àwòn ìbòji"),
-  new Item("Àwòn ìbòji", "shades", false, "/À:wòn ì:bò:ji/", "Shades_Àwòn ìbòji"),
-  new Item("socks", "Ìbosè", true, "/Ì:bo:sè/", "Socks_Ìbosè"),
-  new Item("Ìbosè", "socks", false, "/Ì:bo:sè/", "Socks_Ìbosè"),
-  new Item("stamp", "Àwòn òñtè", true, "/À:wòn ò:ñ:tè/", "Stamp_Àwòn òñtè"),
-  new Item("Àwòn òñtè", "stamp", false, "/À:wòn ò:ñ:tè/", "Stamp_Àwòn òñtè"),
+  new Item("radio", "Rédíò", "redio", "rediyo", "/Ré:dí:ò/", "Radio_Rédíò"),
+  new Item(
+    "raincoat",
+    "Aso Ewu",
+    "raincoat",
+    "raincoat",
+    "/A:so E:wu/",
+    "RainCoat_Aso-Ewu"
+  ),
+  new Item("ribbon", "Teerē", "rịbọn", "ribbon", "/Te:e:rē/", "Ribbon_Teerē"),
+  new Item("rifle", "Ìbon", "égbè", "bindiga", "/Ì:bon/", "Rifle_Ìbon"),
+  new Item(
+    "rug",
+    "Àwòn aso àtèrìn ",
+    "akwa",
+    "rug",
+    "/À:wòn a:so à:tè:rìn/",
+    "Rugs_Àwòn aso àtèrìn"
+  ),
+  new Item(
+    "stereo",
+    "Sítéríò",
+    "stereo",
+    "sitiriyo",
+    "/Sí:té:rí:ò/",
+    "Stereo_Sítéríò"
+  ),
+  new Item(
+    "shades",
+    "Àwòn ìbòji",
+    "shades",
+    "inuwa",
+    "/À:wòn ì:bò:ji/",
+    "Shades_Àwòn ìbòji"
+  ),
+  new Item("socks", "Ìbosè", "sọks", "safa", "/Ì:bo:sè/", "Socks_Ìbosè"),
+  new Item(
+    "stamp",
+    "Àwòn òñtè",
+    "stampụ",
+    "tambari",
+    "/À:wòn ò:ñ:tè/",
+    "Stamp_Àwòn òñtè"
+  ),
   new Item(
     "sneakers",
     "Àwòn bàtà ìdárayá",
-    true,
-    "/À:wòn bà:tà ì:dá:ra:yá/",
-    "Sneakers_Àwòn bàtà ìdárayá"
-  ),
-  new Item(
-    "Àwòn bàtà ìdárayá",
+    "snịịka",
     "sneakers",
-    false,
     "/À:wòn bà:tà ì:dá:ra:yá/",
     "Sneakers_Àwòn bàtà ìdárayá"
   ),
-  new Item("scarf", "síkáfù", true, "/sí:ká:fù/", "Scarf_síkáfù"),
-  new Item("síkáfù", "scarf", false, "/sí:ká:fù/", "Scarf_síkáfù"),
-  new Item("timers", "Aago", true, "/Aa:go/", "Timers_Aago"),
-  new Item("Aago", "timers", false, "/Aa:go/", "Timers_Aago"),
-  new Item("trumpet", "Ìpè", true, "/Ì:pè/", "Trumpet_Ìpè"),
-  new Item("Ìpè", "trumpet", false, "/Ì:pè/", "Trumpet_Ìpè"),
-  new Item("tapestry", "téètì", true, "/téè:tì/", "Tapestry_téètì"),
-  new Item("téètì", "tapestry", false, "/téè:tì/", "Tapestry_téètì"),
-  new Item("tissue", "Àwòn ìsàn", true, "/À;wòn ì:sàn/", "Tissue_Àwòn ìsàn"),
-  new Item("Àwòn ìsàn", "tissue", false, "/À;wòn ì:sàn/", "Tissue_Àwòn ìsàn"),
-  new Item("oven", "Àdìro", true, "/À:dì:ro/", "Oven_Àdìro"),
-  new Item("Àdìro", "oven", false, "/À:dì:ro/", "Oven_Àdìro"),
-  new Item("vent", "Ihò", true, "/I:hò/", "Vent_Ihò"),
-  new Item("Ihò", "vent", false, "/I:hò/", "Vent_Ihò"),
-  new Item("washer", "Ìfoso", true, "/Ì:fo:so/", "Washer_Ìfoso"),
-  new Item("Ìfoso", "washer", false, "/Ì:fo:so/", "Washer_Ìfoso"),
-  // new Item("vase", "Ìkòkò", true, "/veɪs/", "Vase_Ìkòkò"),
-  // new Item("Ìkòkò", "vase", false, "/Ì:kò:kò/", "Vase_Ìkòkò"),
-  new Item("vacuum", "Ìgbálè", true, "/Ì:gbá:lè/", "Vacuum_Ìgbálè"),
-  new Item("Ìgbálè", "vacuum", false, "/Ì:gbá:lè/", "Vacuum_Ìgbálè"),
-  new Item("torch", "Ògùsò", true, "/Ò:gù:sò/", "Torch_Ògùsò"),
-  new Item("Ògùsò", "torch", false, "/Ò:gù:sò/", "Torch_Ògùsò"),
+
+  new Item("scarf", "síkáfù", "ịchafụ", "scarf", "/sí:ká:fù/", "Scarf_síkáfù"),
+  new Item("timers", "Aago", "oge", "masu lokaci", "/Aa:go/", "Timers_Aago"),
+  new Item("trumpet", "Ìpè", "opi", "ƙaho", "/Ì:pè/", "Trumpet_Ìpè"),
+  new Item(
+    "tapestry",
+    "téètì",
+    "tapestry",
+    "tapestry",
+    "/téè:tì/",
+    "Tapestry_téètì"
+  ),
+  new Item(
+    "tissue",
+    "Àwòn ìsàn",
+    "anụ ahụ",
+    "nama",
+    "/À;wòn ì:sàn/",
+    "Tissue_Àwòn ìsàn"
+  ),
+  new Item("oven", "Àdìro", "oven", "tanda", "/À:dì:ro/", "Oven_Àdìro"),
+  new Item("vent", "Ihò", "ventilashị", "iska", "/I:hò/", "Vent_Ihò"),
+  new Item(
+    "washer",
+    "Ìfoso",
+    "washer",
+    "injin wanki",
+    "/Ì:fo:so/",
+    "Washer_Ìfoso"
+  ),
+  new Item("vacuum", "Ìgbálè", "agụụ", "injin", "/Ì:gbá:lè/", "Vacuum_Ìgbálè"),
+  new Item("torch", "Ògùsò", "ọkụ", "fitila", "/Ò:gù:sò/", "Torch_Ògùsò"),
   new Item(
     "yardstick",
     "Okùn okùn",
-    true,
-    "/O:kùn o:kùn/",
-    "YardStick_Okùn-okùn"
-  ),
-  new Item(
-    "Okùn okùn",
     "yardstick",
-    false,
+    "yadi",
     "/O:kùn o:kùn/",
     "YardStick_Okùn-okùn"
   ),
-  new Item("yoghurt", "Wàrà", true, "/Wà:rà/", "Yoghurt_Wàrà"),
-  new Item("Wàrà", "yoghurt", false, "/Wà:rà/", "Yoghurt_Wàrà"),
-  new Item("yarn", "Òwú", true, "/Ò:wú/", "Yarn_Òwú"),
-  new Item("Òwú", "yarn", false, "/Ò:wú/", "Yarn_Òwú"),
-  new Item("hanger", "Kóórí", true, "/Kó:ó:rí/", "Hanger_Kóórí"),
-  new Item("Kóórí", "hanger", false, "/Kó:ó:rí/", "Hanger_Kóórí"),
-  new Item("wardrobe", "Asò", true, "/A:sò/", "Wardrobe_Asò"),
-  new Item("Asò", "wardrobe", false, "/A:sò/", "Wardrobe_Asò"),
-  new Item("zipper", "Àpò ìdálénū", true, "/À:pò ì:dá:lé:nū/", "Zipper_ Àpò ìdálénū"),
-  new Item("Àpò ìdálénū", "zipper", false, "/À:pò ì:dá:lé:nū/", "Zipper_ Àpò ìdálénū"),
-  new Item("brush", "Félé", true, "/Fé:lé/", "Brush_Félé"),
-  new Item("Félé", "brush", false, "/Fé:lé/", "Brush_Félé"),
+
+  new Item("yoghurt", "Wàrà", "yoghurt", "yoghurt", "/Wà:rà/", "Yoghurt_Wàrà"),
+  new Item("yarn", "Òwú", "yarn", "yarn", "/Ò:wú/", "Yarn_Òwú"),
+  new Item("hanger", "Kóórí", "hanga", "hanger", "/Kó:ó:rí/", "Hanger_Kóórí"),
+  new Item("wardrobe", "Asò", "wodrobu", "wardrobe", "/A:sò/", "Wardrobe_Asò"),
+  new Item(
+    "zipper",
+    "Àpò ìdálénū",
+    "zipa",
+    "zik din",
+    "/À:pò ì:dá:lé:nū/",
+    "Zipper_ Àpò ìdálénū"
+  ),
+  new Item("brush", "Félé", "ahịhịa", "goga", "/Fé:lé/", "Brush_Félé"),
   new Item(
     "telephone",
     "Tēlifóónù",
-    true,
+    "ekwentị",
+    "tarho",
     "/Tē:li:fóó:nù/",
     "Telephone _ Tēlifóónù"
   ),
-  new Item(
-    "Tēlifóónù",
-    "telephone",
-    false,
-    "/Tē:li:fóó:nù/",
-    "Telephone _ Tēlifóónù"
-  ),
+
   new Item(
     "toothpaste",
     "Ehín elé",
-    true,
+    "ihe ntacha eze",
+    "man goge baki",
     "/E:hín e:lé/",
     "ToothPaste_Ehín-elé"
   ),
+
   new Item(
-    "Ehín elé",
-    "toothpaste",
-    false,
-    "/E:hín e:lé/",
-    "ToothPaste_Ehín-elé"
+    "staple",
+    "Amúnkanmóra",
+    "staple",
+    "matsi",
+    "/A:mú:n:kan:mó:ra/",
+    "Stapler_Amukanmora"
   ),
-  new Item("staple", "Amúnkanmóra", true, "/A:mú:n:kan:mó:ra/", "Stapler_Amukanmora"),
-  new Item("Amúnkanmóra", "staple", false, "/A:mú:n:kan:mó:ra/", "Stapler_Amukanmora"),
 ];
