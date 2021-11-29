@@ -10,7 +10,6 @@
   background-color: white;
   position: absolute;
   left: 50%;
-  height: 100%;
   transform: translateX(-50%)
 }
 
